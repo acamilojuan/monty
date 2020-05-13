@@ -1,6 +1,6 @@
 #ifndef _MONTY_H
 #define _MONTY_H
- 
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <errno.h>
- 
+
 extern stack_t *head;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -30,7 +30,7 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
- 
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -44,7 +44,7 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
- 
+
 /*----------main--------------*/
 stack_t *add_node(const int n);
 void free_nodes(void);
@@ -73,7 +73,7 @@ void _queue(stack_t **head, unsigned int line_number);
 void _error1(int error_code, ...);
 void _error2(int error_code, ...);
 /**
- * (1) If the user doesn't give any file or more than one argument is sent.
+ * (1): If the user doesn't give any file or more than one argument is sent.
  * (2): If it’s not possible to open or read the file.
  * (3): If the file contains an invalid instruction.
  * (4): If the program can’t malloc anymore.
@@ -85,7 +85,6 @@ void _error2(int error_code, ...);
  * (10): If the top element of the stack is 0, div or mod by 0 is not allowed.
  * (11): If the value in the node is not in the ascii table.
  * (12): If the stack is empty for pchar.
- * /
- 
- 
+ */
+
 #endif
