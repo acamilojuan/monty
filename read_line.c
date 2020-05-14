@@ -1,144 +1,141 @@
 #include "monty.h"
- 
+
 /**
  * open_file -  function that opens a file
  * @filename: is a pointer to the name of the file to be opened.
+ * @stack: double pointer to the node of the stack
  * Return: void.
  */
-void open_file(char *filename)
+void open_file(char *filename, stack_t **stack)
 {
-    FILE *fd;
- 
-    /*if filename is NULL or  If it’s not possible to open or read the file.*/
-    if (!filename)
-        _error(2, filename);
-    /*OPEN a file in the address filename in READONLY mode.*/
-    fd = fopen(filename, "r");
-    /*if the file can not be opened or read, error handling (2)*/
-    if (fd == NULL)
-        _error(2, filename);
-    /*READ, the file already opened*/
-    read_file(fd);
-    /*CLOSE, closes a file descriptor, so that it is not reused in the future*/
-    fclose(fd);
+	/*if filename is NULL or  If it’s not possible to open or read the file.*/
+	if (!filename)
+	{
+		free_nodes(*stack);
+		_error1(2, filename);
+	}
+	/*OPEN a file in the address filename in READONLY mode.*/
+	var_global.fd = fopen(filename, "r");
+	/*if the file can not be opened or read, error handling (2)*/
+	if (var_global.fd == NULL)
+	{
+		/*free_nodes(stack);*/
+		_error1(2, filename);
+	}
+	/*READ, the file already opened*/
+	read_file(filename, stack);
+	/*CLOSE, closes a file descriptor, so that it is not reused in the future*/
+	fclose(var_global.fd);
 }
- 
+
 /**
  * read_file -  function that reads a text file
  * and prints it to the POSIX standard output.
- * @fd: is a pointer to the name of the file to be opened.
+ * @filename: is a pointer to the name of the file to be opened.
+ * @stack: double pointer to the node of the stack
  * Return: void.
  */
-void read_file(FILE *fd)
+void read_file(char *filename, stack_t **stack)
 {
-    char *buffer = NULL;
-    int line_number = 1;
-    size_t len;
-    ssize_t read;
-    int data_format;
- 
-    /*if the file can not be opened or read, error handling (2)*/
-    if (fd == NULL)
-        _error(2, filename);
-    /*reading an entire line from the file*/
-    while ((read = getline(&buffer, &len, fd)) != EOF)
-        data_format = line_interpreter(buffer,line_number, data_format);
- 
-    free(buffer);
+	char *buffer = NULL;
+	int line_number = 1;
+	size_t len;
+	int data_format;
+	(void)filename;
+
+	/*reading an entire line from the file*/
+	while (getline(&buffer, &len, var_global.fd) != EOF)
+	{
+		data_format = tokenizer(buffer, stack, line_number, data_format);
+		line_number++;
+	}
+	free(buffer);
 }
- 
- 
-void line_interpreter(char *buffer, int line_number, int data_format)
+
+/**
+ * tokenizer - function that parses a buffer (line read)
+ * and returns the flag data_format.
+ * @buffer: line read by getline, if buffer == NULL handle error with _error(2)
+ * @stack: double pointer to the node of the stack
+ * @line_number: conter of lines read, that help us to handle the errors.
+ * @data_format: format specifier that tells if the nodes will be enter
+ * as a data_format (0) = stack or data_format (1) = queue.
+ * Return: 0 if stack, 1 if queue.
+ */
+int tokenizer(char *buffer, stack_t **stack, int line_number, int data_format)
 {
- 
-        opcode = strtok(buffer," \n\r\a\t");
-        if (opcode)
-        {
-            get_function(opecode, line_number);
-        }
+	char *opcode;
+	const char *delimiters = " \n";
+
+	/*If *buffer is NULL,is because getline() failed allocating mamory*/
+	if (buffer == NULL)
+	{
+		free_nodes(*stack);
+		_error1(4);
+	}
+	/*Parsing the first element of the buffer delimiters: space and newline*/
+	opcode = strtok(buffer, delimiters);
+	if (!opcode)
+		return (data_format);
+	/*Tokenize whatever is leftover to be parsed*/
+	var_global.number = strtok(NULL, delimiters);
+	/*Ask if the opcode sent is 'stack' or 'queue'*/
+	if (strcmp(opcode, "stack") == 0)
+		return (0);
+	else if (strcmp(opcode, "queue") == 0)
+		return (1);
+	/*here we get the function according to the opcode sent*/
+	get_function(opcode, stack, line_number, data_format);
+	return (data_format);
 }
- 
- 
- 
- 
-{
-    ssize_t file_descriptor = -1, file_position = 0;
-    char *temp_buffer;
-    size_t lenght_tempbuff = 0;
- 
-    /*if filename is NULL return 0*/
-    if (!filename)
-        return (0);
-    /*Create a temporal buffer to store the data and place on it*/
-    temp_buffer = malloc(sizeof(char) * letters);
-    if (!temp_buffer)
-        return (0);
-    /*OPEN a file in the address filename in READONLY mode.*/
-    file_descriptor = open(filename, O_RDONLY);
-    /*if the file can not be opened or read, return 0*/
-    if (file_descriptor == -1)
-    {
-        free(temp_buffer);
-        return (0);
-    }
-    /*READ, where letters is the number of letters it should read and print*/
-    file_position = read(file_descriptor, temp_buffer, letters);
-    /*if the file can not be opened or read, return 0*/
-    if (file_position == -1)
-    {
-        free(temp_buffer);
-        return (0);
-    }
-    /*Finding the lenght of the new temporal buffer*/
-    while (temp_buffer && temp_buffer[lenght_tempbuff])
-        lenght_tempbuff++;
-    /*WRITE, writes up to number of bytes (lenght_tempbuff) from the buffer*/
-    /*pointed temp_buffer to the STDOUT_FILENO (standard output).*/
-    file_position = write(STDOUT_FILENO, temp_buffer, lenght_tempbuff);
-    free(temp_buffer);
-    /*CLOSE, closes a file descriptor, so that it is not and may be reused.*/
-    close(file_descriptor);
-    /*if write fails or does not write the expected amount of bytes, return 0*/
-    if (file_position == -1)
-        return (0);
-    return (file_position);
-}
- 
+
+
 /**
  * get_function - checks character to an array of structs.
- * If a successful match is found, the matching function.XCy
- * @s: The incoming character to be evalued by Michael.
+ * If a successful match is found, the matching function is passed.
+ * @opcode: opcode passed by the user in the program
+ * @stack: double pointer to the node of the stack
+ * @line_number: conter of lines read, that help us to handle the errors.
+ * @data_format: format specifier that tells if the nodes will be enter
  * Return: pointer to a function to format specifier
  */
-void *get_function(char *opcode, int line_number)
+void get_function(char *opcode, stack_t **stack,
+int line_number, __attribute__((unused))int data_format)
 {
-    format_t formats[] = {
-        {"push", _push},
-        {"pall", _pall},
-        {"pint", _pint},
-        {"pop", _pop},
-        {"swap", _swap},
-        {"add", _add},
-        {"sub", _sub},
-        {"div", _div},
-        {"mul", _mul},
-        {"mod", _mod},
-        {"nop", _nop},
-        {"pchar", _pchar},
-        {"pstr", _pstr},
-        {"rotl", _rotl},
-        {"rotr", _rotr},
-        {"stack", _stack},
-        {"queue", _queue},
-        {NULL, NULL}
-    };
- 
-    int i;
- 
-    for (i = 0; formats[i].type != NULL; i++)
-    {
-        if (*s == *formats[i].type)
-            return (formats[i].func);
-    }
-    exit(1);
+	int i = 0, trigger = 0;
+
+	instruction_t op_functions[] = {
+		{"push", _push_stack},
+		{"pall", _pall},
+		/*{"pint", _pint},
+		{"pop", _pop},
+		{"swap", _swap},
+		{"add", _add},
+		{"sub", _sub},
+		{"div", _div},
+		{"mul", _mul},
+		{"mod", _mod},
+		{"nop", _nop},
+		{"pchar", _pchar},
+		{"pstr", _pstr},
+		{"rotl", _rotl},
+		{"rotr", _rotr},*/
+		{NULL, NULL}
+	};
+
+	if (opcode[0] == '#')
+		return;
+	for (i = 0; op_functions[i].opcode != NULL; i++)
+	{
+		if (strcmp(opcode, op_functions[i].opcode) == 0)
+		{
+			op_functions[i].f(stack, line_number);
+			trigger = 1;
+		}
+	}
+	if (trigger == 0)
+	{
+		free_nodes(*stack);
+		_error1(3, opcode, line_number);
+	}
 }
