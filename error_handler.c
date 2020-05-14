@@ -26,25 +26,25 @@ void _error1(int error_code, ...)
 	switch (error_code)
 	{
 		case 1:
-			printf("USAGE: monty file\n");
+			fprintf(stderr,"USAGE: monty file\n");
 			break;
 		case 2:
 			file_name = va_arg(args, char *);
-			printf("Error: Can't open file %s\n", file_name);
+			fprintf(stderr,"Error: Can't open file %s\n", file_name);
 			break;
 		case 3:
 			line_number =  va_arg(args, int);
 			opcode_type = va_arg(args, char *);
-			printf("L%d: unknown instruction %s\n", line_number, opcode_type);
+			fprintf(stderr,"L%d: unknown instruction %s\n", line_number, opcode_type);
 			break;
 		case 4:
-			printf("Error: malloc failed\n");
+			fprintf(stderr,"Error: malloc failed\n");
 			break;
 		case 5:
-			printf("L%d: usage: push integer\n", va_arg(args, int));
+			fprintf(stderr,"L%d: usage: push integer\n", va_arg(args, int));
 			break;
 		case 6:
-			printf("L%d: usage: push integer\n", va_arg(args, int));
+			fprintf(stderr,"L%d: usage: push integer\n", va_arg(args, int));
 			break;
 		default:
 			break;
@@ -76,24 +76,24 @@ void _error2(int error_code, ...)
 	switch (error_code)
 	{
 		case 7:
-			printf("L%d: can't pint, stack empty\n", va_arg(args, int));
+			fprintf(stderr, "L%d: can't pint, stack empty\n", va_arg(args, int));
 			break;
 		case 8:
-			printf("L%d: can't pop an empty stack\n", va_arg(args, int));
+			fprintf(stderr,"L%d: can't pop an empty stack\n", va_arg(args, int));
 			break;
 		case 9:
 			line_number =  va_arg(args, int);
 			opcode_type = va_arg(args, char *);
-			printf("L%d: can't %s, stack too short\n", line_number, opcode_type);
+			fprintf(stderr, "L%d: can't %s, stack too short\n", line_number, opcode_type);
 			break;
 		case 10:
-			printf("L%d: division by zero\n", va_arg(args, unsigned int));
+			fprintf(stderr, "L%d: division by zero\n", va_arg(args, unsigned int));
 			break;
 		case 11:
-			printf("L%d: can't pchar, value out of range\n", va_arg(args, int));
+			fprintf(stderr, "L%d: can't pchar, value out of range\n", va_arg(args, int));
 			break;
 		case 12:
-			printf("L%d: can't pchar, stack empty\n", va_arg(args, int));
+			fprintf(stderr,"L%d: can't pchar, stack empty\n", va_arg(args, int));
 			break;
 		default:
 			break;
