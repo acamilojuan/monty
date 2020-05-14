@@ -12,9 +12,6 @@
 * @error_code: Type of error to be handled
 * Return: void.
 */
-
-
-
 void _error1(int error_code, ...)
 {
 	va_list args;
@@ -49,6 +46,7 @@ void _error1(int error_code, ...)
 		default:
 			break;
 	}
+	free(var_global.buffer);
 	exit(EXIT_FAILURE);
 }
 
@@ -98,5 +96,6 @@ void _error2(int error_code, ...)
 		default:
 			break;
 	}
+	free(var_global.buffer);
 	exit(EXIT_FAILURE);
 }

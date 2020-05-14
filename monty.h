@@ -48,6 +48,7 @@ typedef struct global_variables_s
 {
 	char *number;
 	FILE *fd;
+	char *buffer;
 } global_variables_t;
 
 extern global_variables_t var_global;

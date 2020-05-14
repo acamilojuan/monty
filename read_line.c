@@ -19,7 +19,6 @@ void open_file(char *filename, stack_t **stack)
 	/*if the file can not be opened or read, error handling (2)*/
 	if (var_global.fd == NULL)
 	{
-		/*free_nodes(stack);*/
 		_error1(2, filename);
 	}
 	/*READ, the file already opened*/
@@ -37,19 +36,18 @@ void open_file(char *filename, stack_t **stack)
  */
 void read_file(char *filename, stack_t **stack)
 {
-	char *buffer = NULL;
 	int line_number = 1;
 	size_t len;
 	int data_format;
 	(void)filename;
 
 	/*reading an entire line from the file*/
-	while (getline(&buffer, &len, var_global.fd) != EOF)
+	while (getline(&var_global.buffer, &len, var_global.fd) != EOF)
 	{
-		data_format = tokenizer(buffer, stack, line_number, data_format);
+		data_format = tokenizer(var_global.buffer, stack, line_number, data_format);
 		line_number++;
 	}
-	free(buffer);
+	free(var_global.buffer);
 }
 
 /**
@@ -65,7 +63,7 @@ void read_file(char *filename, stack_t **stack)
 int tokenizer(char *buffer, stack_t **stack, int line_number, int data_format)
 {
 	char *opcode;
-	const char *delimiters = " \n";
+	const char *delimiters = " \n\t\r";
 
 	/*If *buffer is NULL,is because getline() failed allocating mamory*/
 	if (buffer == NULL)
@@ -84,6 +82,7 @@ int tokenizer(char *buffer, stack_t **stack, int line_number, int data_format)
 		return (0);
 	else if (strcmp(opcode, "queue") == 0)
 		return (1);
+
 	/*here we get the function according to the opcode sent*/
 	get_function(opcode, stack, line_number, data_format);
 	return (data_format);
@@ -136,6 +135,6 @@ int line_number, __attribute__((unused))int data_format)
 	if (trigger == 0)
 	{
 		free_nodes(*stack);
-		_error1(3, opcode, line_number);
+		_error1(3, *opcode, line_number);
 	}
 }
