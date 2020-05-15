@@ -56,7 +56,7 @@ void _swap(stack_t **stack, unsigned int line_number)
  * _nop - swaps the top two elements of the stack.
  * If the stack contains less than two elements, handle error
  * with _error(8).
- * @stack: Double pointer to the top of the stack.
+ * @head: Double pointer to the top of the stack.
  * @line_number: line number of the opcode in the file.
  * Return: void.
  */
