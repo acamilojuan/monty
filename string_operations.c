@@ -79,7 +79,7 @@ void _rotl(stack_t **stack, unsigned int line_number)
 	}
 }
 /**
- * _rotr - Function to rotate the stack to the bottom.
+ * _rotr - Function that rotates the stack to the bottom.
  * @stack: Double pointer to the top of the stack.
  * @line_number: line number of the opcode in the file.
  * Return: void.
