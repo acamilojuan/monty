@@ -8,6 +8,18 @@
 #include <string.h>
 #include <unistd.h>
 
+/**
+ * struct global_variables_s - structure for variables as global variables.
+ * @number: string with the parameter given after push
+ * @fd: file descriptor of opened file
+ * @buffer: buffer getline
+ */
+typedef struct global_variables_s
+{
+	char *number;
+	FILE *fd;
+	char *buffer;
+} global_variables_t;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -39,17 +51,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct global_variables_s - structure for variables as global variables.
- * @number: string with the parameter given after push
- * @fd: file descriptor of opened file
- */
-typedef struct global_variables_s
-{
-	char *number;
-	FILE *fd;
-	char *buffer;
-} global_variables_t;
 
 extern global_variables_t var_global;
 

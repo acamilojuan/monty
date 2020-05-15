@@ -77,7 +77,7 @@ int tokenizer(char *buffer, stack_t **stack, int line_number, int data_format)
 		return (data_format);
 	/*Tokenize whatever is leftover to be parsed*/
 	var_global.number = strtok(NULL, delimiters);
-	if (!var_global.number && (strcmp(opcode,"push") == 0))
+	if (!var_global.number && (strcmp(opcode, "push") == 0))
 	{
 		free_nodes(*stack);
 		_error1(6, line_number);
@@ -111,10 +111,10 @@ int line_number, __attribute__((unused))int data_format)
 	instruction_t op_functions[] = {
 		{"push", _push_stack},
 		{"pall", _pall},
-		/*{"pint", _pint},
+		{"pint", _pint},
 		{"pop", _pop},
 		{"swap", _swap},
-		{"add", _add},
+		/*{"add", _add},
 		{"sub", _sub},
 		{"div", _div},
 		{"mul", _mul},
