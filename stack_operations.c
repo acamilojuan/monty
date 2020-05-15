@@ -117,7 +117,7 @@ void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 void _pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL || stack == NULL)
-		_error1(7, line_number);
+		_error2(7, line_number);
 	fprintf(stdout, "%d\n", (*stack)->n);
 }
 
@@ -133,7 +133,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 
 	if (*stack == NULL || stack == NULL)
-		_error1(8, line_number);
+		_error2(8, line_number);
 	new = (*stack)->next;
 	free(*stack);
 	*stack = new;
@@ -153,7 +153,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 	int aux = 0;
 
 	if (*stack == NULL || stack == NULL || (*stack)->next == NULL)
-		_error1(9, line_number);
+		_error2(9, line_number);
 	aux = (*stack)->n;
 	(*stack)->n = new->next->n;
 	new->next->n = aux;
