@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 /**
  * free_nodes - function that
  * frees a doubly linked list dlist_t.
+ * @stack: Stack
  * Return: void
  */
 void free_nodes(stack_t *stack)
