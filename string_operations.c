@@ -74,7 +74,7 @@ void _rotl(stack_t **stack, unsigned int line_number)
 			new = new->next;
 		(*stack)->prev->next = NULL;
 		new->next = (*stack)->prev;
-		(*stack)->prev->prev = *new;
+		(*stack)->prev->prev = new;
 		(*stack)->prev = NULL;
 	}
 }
