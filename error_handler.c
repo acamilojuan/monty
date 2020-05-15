@@ -85,7 +85,8 @@ void _error2(int error_code, ...)
 			fprintf(stderr, "L%d: division by zero\n", va_arg(args, unsigned int));
 			break;
 		case 11:
-			fprintf(stderr, "L%d: can't pchar, value out of range\n", va_arg(args, int));
+			fprintf(stderr, "L%d: can't pchar, value out of range\n",
+			va_arg(args, int));
 			break;
 		case 12:
 			fprintf(stderr,"L%d: can't pchar, stack empty\n", va_arg(args, int));
