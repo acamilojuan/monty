@@ -48,7 +48,8 @@ void _error1(int error_code, ...)
 	}
 	va_end(args);
 	free(var_global.buffer);
-	fclose(var_global.fd);
+	if (var_global.fd)
+		fclose(var_global.fd);
 	exit(EXIT_FAILURE);
 }
 
@@ -100,6 +101,7 @@ void _error2(int error_code, ...)
 	}
 	va_end(args);
 	free(var_global.buffer);
-	fclose(var_global.fd);
+	if (var_global.fd)
+		fclose(var_global.fd);
 	exit(EXIT_FAILURE);
 }
