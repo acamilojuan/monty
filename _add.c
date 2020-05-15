@@ -1,9 +1,9 @@
 #include "monty.h"
- 
 /**
  * _add - adds the top two elements of the stack.
  * If the stack contains less than two elements, handle error
  * with _error(8).
+ * @stack: Double pointer to the top of the stack.
  * @line_number: line number of the opcode in the file.
  * Return: void.
  */
