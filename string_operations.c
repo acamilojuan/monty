@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * _nop - swaps the top two elements of the stack.
+ * _nop - Function that do nothing.
  * If the stack contains less than two elements, handle error
  * with _error(8).
  * @stack: Double pointer to the top of the stack.
