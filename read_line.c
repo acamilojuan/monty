@@ -139,9 +139,6 @@ int line_number, __attribute__((unused))int data_format)
 	if (trigger == 0)
 	{
 		free_nodes(*stack);
-		/*fprintf(stderr,"L%d: unknown instruction %s\n", line_number, opcode);
-		free(var_global.buffer);*/
-		/*exit(EXIT_FAILURE);*/
 		_error1(3, opcode, line_number);
 	}
 }
