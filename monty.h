@@ -67,26 +67,26 @@ int line_number, int data_format);
 void _push_stack(stack_t **stack, unsigned int line_number);
 /*void _push_queue(stack_t **new_node, unsigned int line_number);*/
 void _pall(stack_t **stack, unsigned int line_number);
-void _pint(stack_t **head, unsigned int line_number);
-void _pop(stack_t **head, unsigned int line_number);
-void _swap(stack_t **head, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
 /*-----math_operations-------*/
-void _add(stack_t **head, unsigned int line_number);
-void _sub(stack_t **head, unsigned int line_number);
-void _div(stack_t **head, unsigned int line_number);
-void _mul(stack_t **head, unsigned int line_number);
-void _mod(stack_t **head, unsigned int line_number);
+void _add(stack_t **stack, unsigned int line_number);
+void _sub(stack_t **stack, unsigned int line_number);
+void _div(stack_t **stack, unsigned int line_number);
+void _mul(stack_t **stack, unsigned int line_number);
+void _mod(stack_t **stack, unsigned int line_number);
 /*-----string_operations-------*/
-void _nop(stack_t **head, unsigned int line_number);
-void _pchar(stack_t **head, unsigned int line_number);
-void _pstr(stack_t **head, unsigned int line_number);
+void _nop(stack_t **stack, unsigned int line_number);
+void _pchar(stack_t **stack, unsigned int line_number);
+void _pstr(stack_t **stack, unsigned int line_number);
 /*-----stack_operations2-------*/
-void _rotl(stack_t **head, unsigned int line_number);
-void _rotr(stack_t **head, unsigned int line_number);
+void _rotl(stack_t **stack, unsigned int line_number);
+void _rotr(stack_t **stack, unsigned int line_number);
 /*-------error_handler--------*/
 void _error1(int error_code, ...);
 void _error2(int error_code, ...);
-
+void _error3(int error_code, ...);
 
 
 #endif /* MONTY_H */

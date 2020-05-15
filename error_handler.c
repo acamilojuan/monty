@@ -99,3 +99,47 @@ void _error2(int error_code, ...)
 		fclose(var_global.fd);
 	exit(EXIT_FAILURE);
 }
+
+/**
+* _error3 - function that prints the error messages
+* depending on the error_code provided
+* (9): If the stack contains less than two elements.
+* (9): If the stack contains less than two elements.
+* (9): If the stack contains less than two elements.
+* (9): If the stack contains less than two elements.
+* (9): If the stack contains less than two elements.
+* (9): If the stack contains less than two elements.
+* @error_code: Type of error to be handled
+* Return: void.
+*/
+void _error3(int error_code, ...)
+{
+	va_list args;
+
+	va_start(args, error_code);
+	switch (error_code)
+	{
+		case 13:
+			fprintf(stderr, "L%d: can't add, stack too short\n", va_arg(args, int));
+			break;
+		case 14:
+			fprintf(stderr,"L%d: can't sub, stack too short\n", va_arg(args, int));
+			break;
+		case 15:
+			fprintf(stderr, "L%d: can't div, stack too short\n", va_arg(args, int));
+			break;
+		case 16:
+			fprintf(stderr, "L%d: can't mul, stack too short\n", va_arg(args, int));
+			break;
+		case 17:
+			fprintf(stderr, "L%d: can't mod, stack too short\n", va_arg(args, int));
+			break;
+		default:
+			break;
+	}
+	va_end(args);
+	free(var_global.buffer);
+	if (var_global.fd)
+		fclose(var_global.fd);
+	exit(EXIT_FAILURE);
+}

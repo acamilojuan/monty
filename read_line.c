@@ -115,7 +115,7 @@ int line_number, __attribute__((unused))int data_format)
 		{"pop", _pop},
 		{"swap", _swap},
 		{"add", _add},
-		/*{"sub", _sub},
+		{"sub", _sub},
 		{"div", _div},
 		{"mul", _mul},
 		{"mod", _mod},
@@ -123,7 +123,7 @@ int line_number, __attribute__((unused))int data_format)
 		{"pchar", _pchar},
 		{"pstr", _pstr},
 		{"rotl", _rotl},
-		{"rotr", _rotr},*/
+		{"rotr", _rotr},
 		{NULL, NULL}
 	};
 	if (opcode[0] == '#')
