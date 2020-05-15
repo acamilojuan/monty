@@ -68,12 +68,8 @@ void _error1(int error_code, ...)
 void _error2(int error_code, ...)
 {
 	va_list args;
-	int line_number;
-	char *opcode_type;
 
 	va_start(args, error_code);
-	line_number =  va_arg(args, int);
-	opcode_type = va_arg(args, char *);
 	switch (error_code)
 	{
 		case 7:
@@ -83,9 +79,7 @@ void _error2(int error_code, ...)
 			fprintf(stderr,"L%d: can't pop an empty stack\n", va_arg(args, int));
 			break;
 		case 9:
-			line_number =  va_arg(args, int);
-			opcode_type = va_arg(args, char *);
-			fprintf(stderr, "L%d: can't %s, stack too short\n", line_number, opcode_type);
+			fprintf(stderr, "L%d: can't swap, stack too short\n", va_arg(args, int));
 			break;
 		case 10:
 			fprintf(stderr, "L%d: division by zero\n", va_arg(args, unsigned int));
