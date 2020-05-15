@@ -89,7 +89,7 @@ void _error2(int error_code, ...)
 			va_arg(args, int));
 			break;
 		case 12:
-			fprintf(stderr,"L%d: can't pchar, stack empty\n", va_arg(args, int));
+			fprintf(stderr, "L%d: can't pchar, stack empty\n", va_arg(args, int));
 			break;
 		default:
 			break;
@@ -124,7 +124,7 @@ void _error3(int error_code, ...)
 			fprintf(stderr, "L%d: can't add, stack too short\n", va_arg(args, int));
 			break;
 		case 14:
-			fprintf(stderr,"L%d: can't sub, stack too short\n", va_arg(args, int));
+			fprintf(stderr, "L%d: can't sub, stack too short\n", va_arg(args, int));
 			break;
 		case 15:
 			fprintf(stderr, "L%d: can't div, stack too short\n", va_arg(args, int));
