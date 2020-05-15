@@ -15,7 +15,7 @@ void _nop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * _pchar - prints the value at the top of the stack, followed
+ * _pchar - print the value at the top of the stack, followed
  * by a new line.
  * If the stack is empty for pint, handle error with _error(7).
  * @stack: Double pointer to the top of the stack.
