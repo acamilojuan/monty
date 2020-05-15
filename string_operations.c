@@ -25,9 +25,15 @@ void _nop(stack_t **stack, unsigned int line_number)
 void _pchar(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL || stack == NULL)
-		_error2(7, line_number);
-	if (isalpha((*stack)->n) == 0) /*case not letter of alpha*/
+	{
+		free_nodes(*stack);
+		_error2(12, line_number);
+	}
+	if ((*stack)->n>= 0 && (*stack)->n <= 127) /*case not letter of alpha*/
+	{
+		free_nodes(*stack);
 		_error2(11, line_number);
+	}
 	fprintf(stdout, "%c\n", (*stack)->n);
 }
 
