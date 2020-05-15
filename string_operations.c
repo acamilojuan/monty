@@ -67,7 +67,7 @@ void _rotl(stack_t **stack, unsigned int line_number)
 
 	(void)line_number;
 
-	if ((*stack)->next != NULL || stack != NULL || *stack != NULL)
+	if ((*stack)->next != NULL || stack != NULL || *stack != '\0')
 	{
 		*stack = (*stack)->next;
 		while (new->next != NULL)
