@@ -39,7 +39,7 @@ __attribute__((unused))unsigned int line_number)
 	}
 	/*To check if parameter given to push is negative.*/
 	if (var_global.number[0] == '-')
-		number_int = atoi(var_global.number) * (-1);
+		number_int = atoi(var_global.number) * (1);
 	else
 		number_int = atoi(var_global.number);
 	new_node = malloc(sizeof(stack_t));

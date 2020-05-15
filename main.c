@@ -8,7 +8,6 @@ global_variables_t var_global;
  * @argv: array of strings
  * Return: 0 for success
  */
-
 int main(int argc, char *argv[])
 {
 	stack_t *stack =  NULL;
