@@ -77,6 +77,12 @@ int tokenizer(char *buffer, stack_t **stack, int line_number, int data_format)
 		return (data_format);
 	/*Tokenize whatever is leftover to be parsed*/
 	var_global.number = strtok(NULL, delimiters);
+	if (!var_global.number && (strcmp(opcode,"push") == 0))
+	{
+		free(*stack);
+
+		_error1(6, line_number);
+	}
 	/*Ask if the opcode sent is 'stack' or 'queue'*/
 	if (strcmp(opcode, "stack") == 0)
 		return (0);
@@ -135,6 +141,9 @@ int line_number, __attribute__((unused))int data_format)
 	if (trigger == 0)
 	{
 		free_nodes(*stack);
-		_error1(3, *opcode, line_number);
+		/*fprintf(stderr,"L%d: unknown instruction %s\n", line_number, opcode);
+		free(var_global.buffer);*/
+		/*exit(EXIT_FAILURE);*/
+		_error1(3, opcode, line_number);
 	}
 }

@@ -16,7 +16,7 @@ void _error1(int error_code, ...)
 {
 	va_list args;
 	int line_number;
-	char *opcode_type;
+	char *opcode_type = NULL;
 	char *file_name;
 
 	va_start(args, error_code);
@@ -30,8 +30,8 @@ void _error1(int error_code, ...)
 			fprintf(stderr,"Error: Can't open file %s\n", file_name);
 			break;
 		case 3:
+			opcode_type =  va_arg(args, char *);
 			line_number =  va_arg(args, int);
-			opcode_type = va_arg(args, char *);
 			fprintf(stderr,"L%d: unknown instruction %s\n", line_number, opcode_type);
 			break;
 		case 4:
@@ -46,7 +46,9 @@ void _error1(int error_code, ...)
 		default:
 			break;
 	}
+	va_end(args);
 	free(var_global.buffer);
+	fclose(var_global.fd);
 	exit(EXIT_FAILURE);
 }
 
@@ -96,6 +98,7 @@ void _error2(int error_code, ...)
 		default:
 			break;
 	}
+	va_end(args);
 	free(var_global.buffer);
 	exit(EXIT_FAILURE);
 }
