@@ -56,7 +56,7 @@ void _pstr(stack_t **stack, unsigned int line_number)
 	printf("\n");
 }
 /**
- * _rotl - Function to rotate the stack to the top.
+ * _rotl - Function that rotates the stack to the top.
  * @stack: Double pointer to the top of the stack.
  * @line_number: line number of the opcode in the file.
  * Return: void.
