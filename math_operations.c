@@ -39,6 +39,7 @@ void _sub(stack_t **stack, unsigned int line_number)
 		_error3(14, line_number);
 	}
 	new->next->n -= new->n;
+	*stack = (*new).next;
 	free(new);
 	(*stack)->prev = NULL;
 }
@@ -60,9 +61,13 @@ void _div(stack_t **stack, unsigned int line_number)
 		_error3(15, line_number);
 	}
 	if ((*stack)->n == 0)
+	{
+		free_nodes(*stack);
 		_error2(10, line_number);
+	}
 	new->next->n /= new->n;
 	*stack = (*new).next;
+	free(new);
 	(*stack)->prev = NULL;
 }
 /**
@@ -83,8 +88,9 @@ void _mul(stack_t **stack, unsigned int line_number)
 		free_nodes(*stack);
 		_error3(16, line_number);
 	}
-	new->next->n -= new->n;
+	new->next->n *= new->n;
 	*stack = (*new).next;
+	free(new);
 	(*stack)->prev = NULL;
 }
 /**
@@ -106,8 +112,12 @@ void _mod(stack_t **stack, unsigned int line_number)
 		_error3(17, line_number);
 	}
 	if ((*stack)->n == 0)
+	{
+		free_nodes(*stack);
 		_error2(10, line_number);
+	}
 	new->next->n %= new->n;
 	*stack = (*new).next;
+	free(new);
 	(*stack)->prev = NULL;
 }
