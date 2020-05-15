@@ -21,6 +21,7 @@ __attribute__((unused))unsigned int line_number)
 
 	if (var_global.number == NULL)
 	{
+		printf("%s hola\n", var_global.number);
 		free_nodes(*stack);
 		_error1(6, line_number);
 	}

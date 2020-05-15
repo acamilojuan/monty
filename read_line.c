@@ -79,8 +79,7 @@ int tokenizer(char *buffer, stack_t **stack, int line_number, int data_format)
 	var_global.number = strtok(NULL, delimiters);
 	if (!var_global.number && (strcmp(opcode,"push") == 0))
 	{
-		free(*stack);
-
+		free_nodes(*stack);
 		_error1(6, line_number);
 	}
 	/*Ask if the opcode sent is 'stack' or 'queue'*/
