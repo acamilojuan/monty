@@ -27,7 +27,7 @@ void _pchar(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || stack == NULL)
 	{
 		free_nodes(*stack);
-		_error2(11, line_number);
+		_error2(12, line_number);
 	}
 	if (isalpha((*stack)->n) == 0) /*case not letter of alpha*/
 		_error2(11, line_number);
