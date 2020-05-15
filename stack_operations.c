@@ -17,11 +17,10 @@ void _push_stack(stack_t **stack,
 __attribute__((unused))unsigned int line_number)
 {
 	stack_t *new_node;
-	int i = 0, number_int;
+	int i = 0, number_int = 0;
 
 	if (var_global.number == NULL)
 	{
-		printf("%s hola\n", var_global.number);
 		free_nodes(*stack);
 		_error1(6, line_number);
 	}
@@ -37,9 +36,11 @@ __attribute__((unused))unsigned int line_number)
 			_error1(5, line_number);
 		}
 	}
+	if (strcmp("0", var_global.number) == 0)
+		number_int = 0;
 	/*To check if parameter given to push is negative.*/
-	if (var_global.number[0] == '-')
-		number_int = atoi(var_global.number) * (1);
+	else if (var_global.number[0] == '-')
+		number_int = atoi(var_global.number);
 	else
 		number_int = atoi(var_global.number);
 	new_node = malloc(sizeof(stack_t));
@@ -100,10 +101,7 @@ void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	aux_printer = *stack;
 	while (aux_printer != NULL)
 	{
-		if (aux_printer->n != '\0')
-		{
-			printf("%d\n", aux_printer->n);
-		}
+		printf("%d\n", aux_printer->n);
 		aux_printer = aux_printer->next;
 	}
 }
@@ -118,8 +116,6 @@ void _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
  */
 void _pint(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
-
 	if (*stack == NULL || stack == NULL)
 		_error1(7, line_number);
 	fprintf(stdout, "%d\n", (*stack)->n);

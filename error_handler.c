@@ -23,25 +23,25 @@ void _error1(int error_code, ...)
 	switch (error_code)
 	{
 		case 1:
-			fprintf(stderr,"USAGE: monty file\n");
+			fprintf(stderr, "USAGE: monty file\n");
 			break;
 		case 2:
 			file_name = va_arg(args, char *);
-			fprintf(stderr,"Error: Can't open file %s\n", file_name);
+			fprintf(stderr, "Error: Can't open file %s\n", file_name);
 			break;
 		case 3:
 			opcode_type =  va_arg(args, char *);
 			line_number =  va_arg(args, int);
-			fprintf(stderr,"L%d: unknown instruction %s\n", line_number, opcode_type);
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode_type);
 			break;
 		case 4:
-			fprintf(stderr,"Error: malloc failed\n");
+			fprintf(stderr, "Error: malloc failed\n");
 			break;
 		case 5:
-			fprintf(stderr,"L%d: usage: push integer\n", va_arg(args, int));
+			fprintf(stderr, "L%d: usage: push integer\n", va_arg(args, int));
 			break;
 		case 6:
-			fprintf(stderr,"L%d: usage: push integer\n", va_arg(args, int));
+			fprintf(stderr, "L%d: usage: push integer\n", va_arg(args, int));
 			break;
 		default:
 			break;

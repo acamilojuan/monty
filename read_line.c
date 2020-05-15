@@ -110,6 +110,7 @@ int line_number, __attribute__((unused))int data_format)
 
 	instruction_t op_functions[] = {
 		{"push", _push_stack},
+		{"Push", _push_stack},
 		{"pall", _pall},
 		{"pint", _pint},
 		{"pop", _pop},
@@ -126,7 +127,6 @@ int line_number, __attribute__((unused))int data_format)
 		{"rotr", _rotr},*/
 		{NULL, NULL}
 	};
-
 	if (opcode[0] == '#')
 		return;
 	for (i = 0; op_functions[i].opcode != NULL; i++)
