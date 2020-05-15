@@ -76,7 +76,7 @@ void _error2(int error_code, ...)
 			fprintf(stderr, "L%d: can't pint, stack empty\n", va_arg(args, int));
 			break;
 		case 8:
-			fprintf(stderr,"L%d: can't pop an empty stack\n", va_arg(args, int));
+			fprintf(stderr, "L%d: can't pop an empty stack\n", va_arg(args, int));
 			break;
 		case 9:
 			fprintf(stderr, "L%d: can't swap, stack too short\n", va_arg(args, int));
