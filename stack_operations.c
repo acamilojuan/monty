@@ -56,34 +56,6 @@ __attribute__((unused))unsigned int line_number)
 		(*stack)->prev = new_node;
 	*stack = new_node;
 }
-
-/**
- * _push - pushes an element to the stack.
- * If parameter given to push is not an integer, handle error with _error(5).
- * If there is no argument given to push, handle error with _error(6).
- * @:
- * @line_number: line number of the opcode in the file.
- * Return: void.
- */
-/*void _push_queue(stack_t **new_node, unsigned int line_number)
-{
-	stack_t *aux_node;
-
-	if (!new_node)
-		_error1(4);
-
- Edge case when the doubly linked list is NULL
-	if (head == NULL)
-	{
-		head = *new_node;
-		return;
-	}
-	first_node = head;
-	head = *new_node;
-	new_node->next = first_node;
-	first_node->prev = new_node;
-}*/
-
 /**
  * _pall - prints all the values on the stack, starting
  * from the top of the stack.
